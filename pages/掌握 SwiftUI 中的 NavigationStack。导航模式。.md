@@ -52,40 +52,40 @@
   ```
 - 我们使用基于值的导航链接来引导用户通过应用。看看我们是如何将列表中的每个项目与特定值关联的。请注意，该值必须符合 Hashable 协议。接下来，我们使用 navigationDestination 视图修饰符为特定值定义一个目标视图。在当前示例中，我们只有一个类型的目标，但你可以通过应用多个 navigationDestination 视图修饰符来拥有你需要的任何数量的目标。
 - ```
-  ```
-- struct MasterView2: View {
-    let categories: [Category]
-    let recentProducts: [Product]
+   struct MasterView2: View {
+      let categories: [Category]  
+      let recentProducts: [Product]  
     
-    var body: some View {
-        NavigationStack {
-            List {
-                Section("Categories") {
-                    ForEach(categories) { category in
-                        NavigationLink(value: category) {
-                            Text(category.query)
-                                .font(.headline)
-                        }
-                    }
-                }
-                
-                Section("Recent") {
-                    ForEach(recentProducts) { product in
-                        NavigationLink(product.title, value: product)
-                    }
-                }
-            }
-            .navigationTitle("Home")
-            .navigationDestination(for: Category.self) { category in
-                CategoryView(category: category)
-            }
-            .navigationDestination(for: Product.self) { product in
-                ProductDetailView(product: product)
-            }
-        }
-    }
-  }
-  记得我们还有一个基于值的 NavigationLink 初始化器的另一个版本，允许我们为链接提供自定义标签。我们使用这个初始化器版本为类别链接提供标题字体。
+      var body: some View {  
+          NavigationStack {  
+              List {  
+                  Section("Categories") {  
+                      ForEach(categories) { category in  
+                          NavigationLink(value: category) {  
+                              Text(category.query)  
+                                  .font(.headline)  
+                          }  
+                      }  
+                  }  
+    
+                  Section("Recent") {  
+                      ForEach(recentProducts) { product in  
+                          NavigationLink(product.title, value: product)  
+                      }  
+                  }  
+              }  
+              .navigationTitle("Home")  
+              .navigationDestination(for: Category.self) { category in  
+                  CategoryView(category: category)  
+              }  
+              .navigationDestination(for: Product.self) { product in  
+                  ProductDetailView(product: product)  
+              }  
+          }  
+      }  
+    }  
+    //记得我们还有一个基于值的 NavigationLink 初始化器的另一个版本，允许我们为链接提供自定义标签。我们使用这个初始化器版本为类别链接提供标题字体。
+  ```
 - 放置规则
   您在视图层次结构中放置 navigationDestination 视图修饰符时应小心。放置 navigationDestination 视图修饰符有三条规则：
 - The navigationDestination view modifier 应该在 NavigationStack 内部。

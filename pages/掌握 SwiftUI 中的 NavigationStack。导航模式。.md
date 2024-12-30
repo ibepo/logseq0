@@ -1,5 +1,4 @@
-- 15 Jun 2022
-  SwiftUI 是声明式的数据驱动框架，允许我们通过定义屏幕上的数据渲染来构建复杂的用户界面。导航一直是该框架从第一天起的主要痛点。幸运的是，自 WWDC 22 以来，情况已经改变，SwiftUI 提供了新的数据驱动导航 API。本周我们将学习如何使用新的导航 API 来构建复杂的用户流程。
+- SwiftUI 是声明式的数据驱动框架，允许我们通过定义屏幕上的数据渲染来构建复杂的用户界面。导航一直是该框架从第一天起的主要痛点。幸运的是，自 WWDC 22 以来，情况已经改变，SwiftUI 提供了新的数据驱动导航 API。本周我们将学习如何使用新的导航 API 来构建复杂的用户流程。
 - 使用 Xcode 构建，使用 Helm 打包。
   一站式 macOS 应用程序，增强 App Store Connect 功能，通过 AI 动力工具加速你的应用更新、本地化和应用优化 (ASO)。现在试用享受 25% 折扣！
   基础
@@ -33,22 +32,27 @@
 - 在上面的示例中，我们定义了一个简单的主从流程。我们在视图层次结构的根部放置了 NavigationStack。接下来，我们定义了一条消息列表，其中每条消息都提供了一个链接到该消息详细屏幕的链接。如你所见，我们仍然在这里使用旧的 NavigationLink 类型，它在这个用例中表现得非常好。
 - 要了解更多 SwiftUI 的新功能，请参阅我发布的“WWDC22 之后的 SwiftUI 新特性”文章。
 - The NavigationLink 类型增加了新的数据驱动能力。一个新的初始化器使我们能够创建一个绑定到某些值的链接。这里是我们之前示例使用新的数据驱动导航 API 重构后的版本。
-- struct MasterView1: View {
-    let products: [Product]
+- ```
+  - struct MasterView1: View {
+      let products: [Product]  
     
-    var body: some View {
-        NavigationStack {
-            List(products) { product in
-                NavigationLink(product.title, value: product)
-            }
-            .navigationTitle("Products")
-            .navigationDestination(for: Product.self) { product in
-                ProductDetailView(product: product)
-            }
-        }
-    }
-  }
-  我们使用基于值的导航链接来引导用户通过应用。看看我们是如何将列表中的每个项目与特定值关联的。请注意，该值必须符合 Hashable 协议。接下来，我们使用 navigationDestination 视图修饰符为特定值定义一个目标视图。在当前示例中，我们只有一个类型的目标，但你可以通过应用多个 navigationDestination 视图修饰符来拥有你需要的任何数量的目标。
+      var body: some View {  
+          NavigationStack {  
+              List(products) { product in  
+                  NavigationLink(product.title, value: product)  
+              }  
+              .navigationTitle("Products")  
+              .navigationDestination(for: Product.self) { product in  
+                  ProductDetailView(product: product)  
+              }  
+          }  
+      }  
+    }  
+   
+  ```
+- 我们使用基于值的导航链接来引导用户通过应用。看看我们是如何将列表中的每个项目与特定值关联的。请注意，该值必须符合 Hashable 协议。接下来，我们使用 navigationDestination 视图修饰符为特定值定义一个目标视图。在当前示例中，我们只有一个类型的目标，但你可以通过应用多个 navigationDestination 视图修饰符来拥有你需要的任何数量的目标。
+- ```
+  ```
 - struct MasterView2: View {
     let categories: [Category]
     let recentProducts: [Product]

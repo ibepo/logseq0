@@ -7,7 +7,9 @@
   一站式 macOS 应用程序，增强 App Store Connect 功能，通过 AI 动力工具加速你的应用更新、本地化和应用优化 (ASO)。现在试用享受 25% 折扣！
   基础
   首先，我必须提到旧的 NavigationView 已经弃用，我们应该使用新的 NavigationStack。让我们来看一个快速的例子。
-- `struct MasterView: View {
+- ```
+  ```
+- struct MasterView: View {
     let products: [Product]
     
     var body: some View {
@@ -20,7 +22,7 @@
             .navigationTitle("Products")
         }
     }
-  }`
+  }
 - struct ProductDetailView: View {
     let product: Product
     
